@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "最新客片",
+  "titleNView": {
+    "buttons": [
+      {
+        "type": "menu"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "我发布的",
+  "titleNView": {
+    "buttons": [
+      {
+        "type": "menu"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

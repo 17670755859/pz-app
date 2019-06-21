@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "订单评论",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "提交",
+        "color": "#FA9EB6",
+        "fontSize": "16px"
+      }
+    ]
+  },
+  "usingComponents": {
+    "stars": "/components/stars/stars"
+  }
+}

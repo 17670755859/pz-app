@@ -1,0 +1,31 @@
+.content.data-v-11010d2a {
+  padding-top: 70rpx;
+  min-height: 100%;
+  background-color: #fff;
+}
+.list-content.data-v-11010d2a {
+  margin-bottom: 70rpx;
+}
+.list-content .header.data-v-11010d2a {
+  text-align: center;
+}
+.list-content .header .h4.data-v-11010d2a {
+  font-size: 37rpx;
+  color: #191919;
+}
+.list-content .header .tips.data-v-11010d2a {
+  margin-top: 20rpx;
+  font-size: 18rpx;
+  color: #191919;
+}
+.list-content .header .down.data-v-11010d2a {
+  width: 14rpx;
+  height: 12rpx;
+  margin-top: 20rpx;
+}
+.list-content .video-prose.data-v-11010d2a {
+  width: 100%;
+  margin-top: 50rpx;
+  height: 420rpx;
+}
+

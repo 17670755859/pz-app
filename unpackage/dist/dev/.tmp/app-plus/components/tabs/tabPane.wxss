@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.tab-pane-item.data-v-6fb37fec {
+  width: 100%;
+  min-height: 100rpx;
+  height: 100%;
+  display: inline-block;
+  white-space: initial;
+  font-size: 24rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+

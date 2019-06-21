@@ -1,0 +1,263 @@
+<template>
+	<div class="content">
+		<!-- uni 官方顶部选项卡组件 -->
+		<uni-tab-bar :drag="true" :tab-bars="tabBars" :tab-index="tabCurrentIndex" @tabChange="tabChange"></uni-tab-bar>
+
+		<!-- slider就是uni swiper -->
+		<slider class="slider" :index="tabCurrentIndex" :infinite="false" @change="tabChange">
+
+			<!-- list 垂直滚动列表组件 -->
+			<list v-for="(tabItem, tabIndex) in tabBars" :key="tabIndex" class="list-content">
+				<!-- refresh 下拉刷新组件  
+				* 	 weex 的refresh和loading组件在ios效果很好，但是在安卓端效果并不好
+				* -->
+				<refresh class="loading" @refresh="onRefresh" :display="tabItem.refreshing ? 'show' : 'hide'">
+					<loading-indicator v-show="tabItem.refreshing" class="loading-icon"></loading-indicator>
+					<text class="loading-text">{{tabItem.refreshing?'正在加载..': '下拉刷新数据'}}</text>
+				</refresh>
+
+				<!-- 社区列表 -->
+				<cell class="box-cell" v-for="(item, index) in  tabItem.newsList" :key="index">
+					<div class="community-list">
+						<div class="community-header">
+							<div class="community-header-user">
+								<div class="community-header-user-head">
+									<image style="width: 84px; height: 84px;" src="../../static/img/avator.png"></image>
+								</div>
+								<div class="community-header-user-info">
+									<text class="community-header-user-info-name">{{item.author}}</text>
+									<text class="community-header-user-info-time">{{item.time}}</text>
+								</div>
+							</div>
+							<div class="community-header-operate">
+								<div class="community-header-operate-follow" v-if="item.follow == 0">
+									<text class="iconfont community-header-operate-follow-iconfont">&#xe62b;</text>
+									<text class="community-header-operate-follow-text">关注</text>
+								</div>
+								<div class="community-header-operate-delete" v-else @click="deleteList(index)">
+									<text class="iconfont icon-delete">&#xe849;</text>
+								</div>
+							</div>
+						</div>
+						<div class="community-body">
+							<div class="community-body-content" @click="navToDetails(item)">
+								<text class="community-body-content-text">{{item.title}}</text>
+							</div>
+							<div class="community-body-image">
+								<image resize="cover" v-for="(img, imgIndex) in item.images" :key="imgIndex" @click="previewImageHandler(item.images, imgIndex)"
+								 class="community-body-image-item" :src="img"></image>
+							</div>
+						</div>
+					</div>
+				</cell>
+
+				<!-- 加载更多组件 -->
+				<loading class="loading" @loading="loadMore(tabItem)" :display="tabItem.loadMoreStatus==1 ? 'show' : 'hide'">
+					<loading-indicator v-show="tabItem.loadMoreStatus == 1" class="loading-icon"></loading-indicator>
+					<text class="loading-text">{{tabItem.loadMoreStatus==0?'上拉显示更多':tabItem.loadMoreStatus==1?'正在加载..':'没有更多数据了'}}</text>
+				</loading>
+			</list>
+
+		</slider>
+	</div>
+</template>
+
+<script>
+	import indexMixin from './index'
+	import uniTabBar from '@/components/tab-nvue/tabbar.nvue'
+	const domModule = weex.requireModule('dom')
+
+	export default {
+		/**
+		 * 大部分js可以复用vue中写的
+		 * 直接混入即可
+		 */
+		mixins: [indexMixin],
+		components: {
+			uniTabBar,
+		},
+		data() {
+			return {}
+		},
+		beforeCreate() {
+			domModule.addRule('fontFace', {
+				'fontFamily': "iconfont",
+				'src': "url('https://at.alicdn.com/t/font_1209399_p4k4ixzgsz.ttf')",
+			});
+		},
+		created() {
+			// 监听原生导航事件
+			uni.onNavigationBarButtonTap((e) => {
+				if (e.index == 0) {
+					uni.navigateTo({
+						url: '/pages/community-publish/community-publish',
+						animationType: "slide-in-bottom"
+					})
+				}
+			});
+			//获取数据，方法通过mixin混入
+			this.loadTabbars();
+		},
+		methods: {
+
+			tabChange(e) {
+				this.tabCurrentIndex = e.index;
+
+				//第一次切换tab，动画结束后需要加载数据
+				let tabItem = this.tabBars[this.tabCurrentIndex];
+				if (this.tabCurrentIndex !== 0 && tabItem.loaded !== true) {
+					this.loadNewsList('add');
+					tabItem.loaded = true;
+				}
+			},
+
+			//下拉刷新
+			onRefresh(e) {
+				this.loadNewsList('refresh');
+			},
+			//加载更多
+			loadMore(tabItem) {
+				this.loadNewsList('add');
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	/* 字体图标 */
+	.iconfont {
+		font-family: iconfont;
+	}
+
+	.content {
+		flex: 1;
+		background-color: #fff;
+	}
+
+	.slider {
+		flex: 1;
+		background-color: #f8f8f8;
+	}
+
+	.list-content {
+		flex: 1;
+	}
+	
+	.box-cell{
+		width: 750px;
+	}
+
+	/* 下拉刷新 加载更多 */
+	.loading {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: 750px;
+		height: 80px;
+	}
+
+	.loading-text {
+		font-size: 28px;
+		color: #888;
+	}
+
+	.loading-icon {
+		height: 40px;
+		width: 40px;
+		color: #999999;
+		margin-right: 10px;
+	}
+
+	.icon-delete{
+		font-size: 36px;
+		margin-right: 10px;
+	}
+
+	/* 社区列表  */
+	.community-list {
+		flex: 1;
+		padding: 23px;
+		background-color: #fff;
+		margin-top: 20px;
+	}
+
+	.community-header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.community-header-user {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.community-header-user-info {
+		margin-left: 30px;
+	}
+
+	.community-header-user-info-name {
+		font-size: 33px;
+		color: #3d3d3d;
+	}
+
+	.community-header-user-info-time {
+		font-size: 25px;
+		color: #B0B0B0;
+		margin-top: 4px;
+	}
+
+	.community-header-operate-follow {
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		border-style: solid;
+		border-width: 1px;
+		border-color: #FA9EB6;
+		border-radius: 10px;
+		padding: 10px;
+	}
+
+	.community-header-operate-follow-iconfont {
+		font-size: 24px;
+		color: #FA9EB6;
+	}
+
+	.community-header-operate-follow-text {
+		font-size: 24px;
+		color: #FA9EB6;
+	}
+
+	.community-body {
+		margin-top: 20px;
+	}
+
+	.community-body-content-text {
+		border-style: solid;
+		border-width: 1px;
+		border-color: transparent;
+		font-size: 30px;
+		color: #373737;
+		lines: 3
+	}
+
+	.community-body-image {
+		border-style: solid;
+		border-color: transparent;
+		border-width: 1px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-top: 20px;
+	}
+
+	.community-body-image-item {
+		flex: 1;
+		margin: 0 5px;
+		height: 230px;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+</style>

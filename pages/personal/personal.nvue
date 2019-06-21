@@ -1,0 +1,389 @@
+<template>
+	<div class="content">
+		<!-- 状态栏占位符 -->
+		<div class="header" :style="{height: statusbarHeight*2+88, backgroundColor: 'rgba(255,255,255,'+afterHeaderOpacity+')'}">
+			<div class="header-status" :style="{height: statusbarHeight*2}"></div>
+			<div class="header-content">
+				<text class="header-title" :style="{opacity: afterHeaderOpacity}">我的</text>
+				<div class="header-ft">
+					<div class="header-btn" @click="goRouter('setting')">
+						<text class="iconfont icon-setting" :style="{color: btnColor, opacity: 1}">&#xe78e;</text>
+					</div>
+					<div class="header-btn" @click="goRouter('message-list')">
+						<text class="redDot"></text>
+						<text class="iconfont icon-message" :style="{color: btnColor}">&#xe644;</text>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<scroller class="scroll-wrapper" @scroll="onScroll" :show-scrollbar="false">
+			<div class="personal-content" :style="{height: statusbarHeight*2+308}">
+				<image class="head-bg" src="../../static/images/info-banner.png" resize="cover"></image>
+				<div class="head-content">
+					<div class="avator-content">
+						<image class="avator" @click="goRouter('settingInfo')" src="../../static/img/order-avator.jpg"></image>
+					</div>
+					<div style="margin-left: 15px;">
+							<div class="name-box">
+								<text class="people-name">我是昵称</text>
+								<image style="width: 103px;height: 27px;" src="../../static/images/vip.png"></image>
+							</div>
+							<div class="qiandao-box" @click="goRouter('sign')">
+								<image class="sigin" src="../../static/images/sigin.png"></image>
+							</div>
+					</div>
+				</div>
+				<image class="member-btn" src="../../static/images/huiyuan-fuli.png"></image>
+			</div>
+			<div class="order-content">
+				<div class="order-title">
+					<text class="order-text-left">我的订单</text>
+					<div class="order-right" @click="goRouter('order')">
+						<text class="order-text-right">查看全部</text>
+						<text class="iconfont icon-arrowRight">&#xe600;</text>
+					</div>
+				</div>
+				<div class="order-body">
+					<div class="order-body-item" v-for="(item, index) in tabBars" :key="index" @click="goRouter('order')">
+						<div class="item-logo">
+							<text class="iconfont tab-icon">{{item.icon}}</text>
+						</div>
+						<text class="item-title">{{item.title}}</text>
+					</div>
+				</div>
+			</div>
+			<div class="route-content">
+				<div class="route-item" :class="[index < routes.length ? 'bottom-line':'']" v-for="(item, index) in routes" :key="index" @click="goRouter(item.path)">
+					<div class="route-item-left">
+						<text class="route-item-icon iconfont">{{item.icon}}</text>
+						<text class="route-item-label">{{item.title}}</text>
+					</div>
+					<text class="iconfont route-right">&#xe600;</text>
+				</div>
+			</div>
+			<div style="height: 40px;"></div>
+		</scroller>
+	</div>
+</template>
+
+<script>
+	let height = 0, tmpy = 0, scrollTop = 0,activeScrollTop=0;
+	const dom = weex.requireModule('dom')
+	import api from '../../common/request/index.js'
+	import config from '@/common/config.js'
+	Vue.prototype.$api = api
+	export default {
+		data() {
+			return {
+				statusbarHeight: 0, // 系统状态栏高度
+				afterHeaderOpacity: 0,
+				btnColor: 'white', // 导航头部按钮颜色切换 黑-白
+				tabBars: [],
+				user: {}, // 用户信息
+				baseUrl: config.BaseUrl,
+				routes: [
+					{ icon: '\ue616', title: '我的积分', path: '' },
+					{ icon: '\ue628', title: '我发布的', path: 'publish-list' },
+					{ icon: '\ue611', title: '排行榜', path: 'ranking-list' },
+					{ icon: '\ue634', title: '我的收藏', path: 'collection' },
+					{ icon: '\ue655', title: '关于我们', path: 'ours' }
+				]
+			}
+		},
+		beforeCreate() {
+			dom.addRule('fontFace', {
+				'fontFamily': "iconfont",
+				'src': "url('https://at.alicdn.com/t/font_1209399_7d4srvzxnx.ttf')",
+			});
+		},
+		created() {
+			this.statusbarHeight = plus.navigator.getStatusbarHeight();
+			this.getTabBars();
+			// this.getUserInfo();
+		},
+		methods: {
+			getTabBars() {
+				this.tabBars = [{title: '待发货', icon: '\ue636'}, {title: '待收货',icon: '\ue68e'},{title:'评论',icon: '\ue601'},{title: '退换/售后',icon: '\ue60e'}]
+			},
+			
+			// 获取用户信息
+			getUserInfo() {
+				let that = this;
+				uni.getStorage({
+					key: 'token',
+					success: function (res) {
+						that.$api.getUserInfo({token: res.data}).then(res => {
+							that.user = res.data;
+						})
+					}
+				});
+			},
+			
+			// 滚动监听 设置导航头部渐变
+			onScroll(e) {
+				scrollTop = Math.abs(e.contentOffset.y);
+				tmpy = this.statusbarHeight * 2 + 88; // 渐变框高度
+				activeScrollTop = scrollTop > tmpy ? tmpy : scrollTop; // 当前滑动高度
+				this.btnColor = activeScrollTop>=tmpy/2 ? 'black' : 'white';
+				this.afterHeaderOpacity = activeScrollTop/tmpy;
+			},
+			
+			goRouter(path) {
+				uni.navigateTo({
+					url: '/pages/' + path + '/' + path
+				})
+			}
+		},
+	}
+</script>
+
+<style scoped>
+	/* 字体图标 */
+	.iconfont {
+		font-family: iconfont;
+		text-align: center;
+	}
+	
+	.content {
+		flex: 1;
+		background-color: #EAEAEA;
+	}
+	
+	.scroll-wrapper{
+		flex: 1;
+	}
+	
+	.header{
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+	
+	.header-content{
+		position: relative;
+		height: 90px;
+	}
+	
+	.avator-content{
+		width: 120px;
+		height: 120px;
+		border-radius: 100px;
+		overflow: hidden;
+	}
+	
+	.avator{
+		width: 120px;
+		height: 120px;
+		border-radius: 100px;
+		overflow: hidden;
+	}
+	
+	.header-title{
+		position: absolute;
+		left: 140px;
+		right: 140px;
+		text-align: center;
+		color: #FFFFFF;
+		font-size: 34px;
+		line-height: 88px;
+		font-size: 32px;
+		color: #000000;
+	}
+	
+	.header-ft{
+		flex-direction: row;
+		align-items: center;
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 88px;
+		text-align: center;
+		padding: 0 10px;
+	}
+	
+	.header-btn{
+		position: relative;
+		margin-left: 10px;
+		padding: 8px;
+	}
+	
+	.icon-message{
+		font-size: 44px;
+	}
+	
+	.icon-setting{
+		font-size: 44px;
+	}
+	
+	.redDot{
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		background-color: red;
+	}
+	
+	/* 个人信息部分 */
+	.personal-content{
+		position: relative;
+		flex-direction: row;
+		align-items: center;
+	}
+	
+	.head-bg{
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+	}
+	
+	.head-content{
+		flex-direction: row;
+		align-items: center;
+		margin-left: 35px;
+	}
+	
+	.name-box{
+		flex-direction: row;
+		align-items: flex-end;
+	}
+	
+	.people-name{
+		color: #FFFFFF;
+		font-size: 33px;
+		margin-right: 10px;
+	}
+	
+	.qiandao-box{
+		margin-top: 10px;
+		border-radius: 30px;
+		width: 160px;
+		height: 46px;
+		background-color: #FAB4C6;
+	}
+	
+	.sigin{
+		height: 46px;
+	}
+	
+	.member-btn{
+		position: absolute;
+		z-index: 8;
+		width: 206px;
+		height: 124px;
+		right: 0;
+		bottom: 4px;
+	}
+	
+	/* 我的订单 */
+	.order-content{
+		margin-left: 25px;
+		margin-right: 25px;
+		background-color: #FFFFFF;
+		border-radius: 15px;
+		margin-top: 35px;
+	}
+	
+	.order-title{
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20px;
+	}
+	
+	.order-text-left{
+		font-size: 34px;
+		color: #1e1b1c;
+	}
+	
+	.order-right{
+		flex-direction: row;
+		align-items: center;
+	}
+	
+	.order-text-right{
+		font-size: 26px;
+		color: #8f8f8f;
+		margin-right: 10px;
+	}
+	
+	.icon-arrowRight{
+		font-size: 26px;
+		color: #8f8f8f;
+	}
+	
+	.order-body{
+		border-top-style: solid;
+		border-top-width: 1px;
+		border-top-color: #DCDCDC;
+		padding: 30px 12px 20px;
+		flex-direction: row;
+		align-items: center;
+	}
+	
+	.order-body-item{
+		flex: 1;
+	}
+	
+	.item-logo{
+		position: relative;
+	}
+	
+	.tab-icon{
+		font-size: 60px;
+		color: #979797;
+	}
+	
+	.item-title{
+		font-size: 26px;
+		color: #505050;
+		text-align: center;
+		margin-top: 20px;
+	}
+	
+	.route-content{
+		margin-top: 30px;
+		margin-left: 25px;
+		margin-right: 25px;
+		background-color: #FFFFFF;
+		border-radius: 15px;
+	}
+	
+	.route-item{
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 30px 20px 40px 40px;
+	}
+	
+	.route-item-left{
+		flex-direction: row;
+		align-items: center;
+	}
+	
+	.route-item-icon{
+		font-size: 36px;
+		color: #979797;
+	}
+	
+	.route-item-label{
+		font-size: 30px;
+		margin-left: 15px;
+	}
+	
+	.route-right{
+		font-size: 30px;
+		color: #C7C7C7;
+	}
+	
+	.bottom-line{
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-bottom-color: #EEEEEE;
+	}
+</style>

@@ -1,0 +1,318 @@
+<template>
+	<div class="content">
+		<div class="header-content">
+			<!-- 搜索框 -->
+			<div class="search-content" @click="searchHandler">
+				<text class="iconfont iconfont-search">&#xe60d;</text>
+				<text class="placholder">搜索店内宝贝...</text>
+			</div>
+			<!-- tab塞选 -->
+			<div class="tab-content">
+				<div class="tab-item" :class="[currentIndex == index ? 'tab-active' : '']" v-for="(tab, index) in tabBars" :key="index"
+				 @click="sortHandler(index)">
+					<text class="tab" :class="[currentIndex == index?'tab-active':'']">{{tab.title}}</text>
+					<text v-if="tab.sorts" class="iconfont iconfont-sort" :class="[currentIndex == index?'tab-active':'']">&#xf0c5;</text>
+				</div>
+			</div>
+		</div>
+		<scroller class="scroll">
+			<div class="product-content">
+				<div class="product-list" v-for="(v, i) in dataList" :key="i">
+					<div class="product-box" v-for="(t, k) in v" :key="k" @click="goDetails(t)">
+						<image class="product-img" :src="t.url" resize="cover"></image>
+						<div class="product-footer">
+							<div class="product-box-name">
+								<text class="product-box-name-text">{{t.name}}</text>
+							</div>
+							<div class="product-bottom">
+								<div class="jifen">
+									<text class="jifen-num">{{t.num}}</text>
+									<text class="jifen-conpy">积分</text>
+								</div>
+								<text class="want">{{t.people}}人想要</text>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 加载更多组件 -->
+			<loading class="loading" @loading="loadMore()" :display="loadMoreStatus==1 ? 'show' : 'hide'">
+				<loading-indicator v-show="loadMoreStatus == 1" class="loading-icon"></loading-indicator>
+				<text class="loading-text">{{loadMoreStatus==0?'上拉显示更多': loadMoreStatus==1?'正在加载..':'没有更多数据了'}}</text>
+			</loading>
+		</scroller>
+	</div>
+</template>
+
+<script>
+	import json from '@/Json.js'
+	const domModule = weex.requireModule('dom')
+	import uniSkip from '../../common/uni-skip.js'
+	Vue.prototype.$uniSkip = uniSkip
+	import {
+		WxcIcon
+	} from 'weex-ui';
+	export default {
+		components: {
+			WxcIcon
+		},
+		data() {
+			return {
+				currentIndex: 0,
+				loadMoreStatus: 0, // 当前加载状态
+				tabBars: [{
+						title: '综合'
+					},
+					{
+						title: '销量'
+					},
+					{
+						title: '新品'
+					},
+					{
+						title: '价格',
+						sorts: true
+					}
+				],
+				dataList: [[], []]
+			}
+		},
+		beforeCreate() {
+			domModule.addRule('fontFace', {
+				'fontFamily': "iconfont",
+				'src': "url('https://at.alicdn.com/t/font_1209399_nqqplnfj0qi.ttf')",
+			});
+		},
+		created() {
+			this.getDataList()
+		},
+		methods: {
+			// 获取列表
+			getDataList() {
+				let data = json.integralList;
+				for (let i = 0; i < data.length; i++) {
+					if (i%2 == 0) {
+						this.dataList[0].push(data[i])
+					} else {
+						this.dataList[1].push(data[i])
+					}
+				}
+			},
+			
+			//加载更多
+			loadMore(tabItem) {
+				this.loadIntegralList();
+			},
+			
+			// 
+			loadIntegralList() {
+				if (this.loadMoreStatus === 2) {
+					this.loadMoreStatus = 1
+					setTimeout(() => {
+						this.loadMoreStatus = 2;
+					}, 100)
+					return;
+				}
+				this.loadMoreStatus = 1;
+				
+				setTimeout(() => {
+					let list = json.integralList;
+					list.sort((a, b) => {
+						return Math.random() > .5 ? -1 : 1; //静态数据打乱顺序
+					})
+					list.forEach((v,i) => {
+						if (i%2 == 0) {
+							this.dataList[0].push(v);
+						} else {
+							this.dataList[1].push(v);
+						}
+					})
+					this.loadMoreStatus = 0;
+				}, 600)
+			},
+			
+			// tab切换
+			sortHandler(index) {
+				this.currentIndex = index;
+				this.dataList = [[],[]];
+				let list = json.integralList;
+				list.sort((a, b) => {
+					return Math.random() > .5 ? -1 : 1; //静态数据打乱顺序
+				})
+				list.forEach((v,i) => {
+					if (i%2 == 0) {
+						this.dataList[0].push(v);
+					} else {
+						this.dataList[1].push(v);
+					}
+				})
+			},
+			
+			// 查询
+			searchHandler() {
+				this.$uniSkip.navigateTo({
+					url: '/pages/search/search'
+				})
+			},
+			
+			// 跳转详情
+			goDetails(data) {
+				this.$uniSkip.navigateTo({
+					url: '/pages/integral-info/integral-info',
+					data: data
+				})
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	/* 下拉刷新 加载更多 */
+	.loading {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: 750px;
+		height: 80px;
+	}
+	
+	.loading-text {
+		font-size: 28px;
+		color: #888;
+	}
+	
+	.loading-icon {
+		height: 40px;
+		width: 40px;
+		color: #999999;
+		margin-right: 10px;
+	}
+	
+	.icon-delete{
+		font-size: 36px;
+		margin-right: 10px;
+	}
+	
+	.iconfont {
+		font-family: iconfont;
+	}
+
+	.content {
+		flex: 1;
+		background-color: #FFFFFF;
+	}
+
+	.scroll {
+		flex: 1;
+		padding: 0 25px;
+	}
+
+	/* 顶部导航 */
+	.header-content {
+		padding: 0 24px;
+	}
+
+	.search-content {
+		flex-direction: row;
+		align-items: center;
+		border-radius: 30px;
+		background-color: #F4F4F4;
+		height: 70px;
+		line-height: 70px;
+		padding-left: 45px;
+	}
+
+	.iconfont-search {
+		font-size: 26px;
+		color: #818181;
+	}
+
+	.placholder {
+		font-size: 26px;
+		color: #818181;
+		margin-left: 10px;
+	}
+
+	.tab-content {
+		flex-direction: row;
+		padding: 40px 10px 20px;
+	}
+
+	.tab-item {
+		margin-right: 70px;
+		flex-direction: row;
+		align-items: center;
+		border-radius: 40px;
+	}
+
+	.tab {
+		color: #212121;
+		font-size: 28px;
+		border-radius: 50px;
+		padding: 2px 10px;
+	}
+
+	.tab-active {
+		color: #FFFFFF;
+		background-color: #FBA7B7;
+	}
+	
+	/* 商品列表 */
+	.product-content{
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	
+	.product-list{
+		flex: 1;
+		margin: 0 5px;
+	}
+	
+	.product-box{
+		margin-bottom: 10px;
+		border-radius: 8px;
+		border-style: solid;
+		border-width: 1px;
+		border-color: #EEEEEE;
+	}
+	
+	.product-box-name-text{
+		font-size: 30px;
+		color: #323436;
+		lines: 1;
+	}
+	
+	.product-img{
+		height: 300px;
+	}
+	
+	.product-footer{
+		padding: 15px;
+	}
+	
+	.product-bottom{
+		margin-top: 10px;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.jifen{
+		flex-direction: row;
+		align-items: center;
+	}
+	.jifen-num{
+		font-size: 38px;
+		color: #FFB074;
+	}
+	
+	.jifen-conpy{
+		font-size: 24px;
+		color: #878787;
+	}
+	
+	.want{
+		font-size: 24px;
+		color: #878787;
+	}
+</style>

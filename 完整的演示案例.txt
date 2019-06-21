@@ -1,0 +1,7 @@
+﻿uni-demo.zip 包含所有基础案例,中高级案例源码
+
+解压之后, 把文件拖到HBuilderX 即可运行
+
+如果觉得好用的话, 记得5星 和 star ~  Thanks♪(･ω･)ﾉ
+
+mescroll-uni官方文档:  http://www.mescroll.com/uni.html

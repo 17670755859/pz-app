@@ -1,0 +1,35 @@
+.content.data-v-433d7dd6 {
+  min-height: 100%;
+  background-color: #fff;
+}
+.logo.data-v-433d7dd6 {
+  text-align: center;
+  padding: 80rpx 0 65rpx 0;
+}
+.logo-img.data-v-433d7dd6 {
+  width: 210rpx;
+  height: 85rpx;
+}
+.list.data-v-433d7dd6 {
+  padding: 0 20rpx;
+}
+.list_cell.data-v-433d7dd6 {
+  text-align: center;
+  margin-bottom: 40rpx;
+  padding: 10rpx 5rpx;
+  border: 1px solid #AAAAAA;
+}
+.list_cell-headImg.data-v-433d7dd6 {
+  width: 100%;
+}
+.list_cell-title.data-v-433d7dd6 {
+  width: 306rpx;
+  height: 38rpx;
+  margin: 20rpx 0;
+}
+.list_cell-text.data-v-433d7dd6 {
+  font-size: 24rpx;
+  color: #3e3a39;
+  letter-spacing: 8rpx;
+}
+

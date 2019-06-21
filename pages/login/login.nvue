@@ -1,0 +1,261 @@
+<template>
+	<div class="content">
+		<div class="logo">
+			<image class="logo-tips" src="../../static/images/logo.jpg"></image>
+		</div>
+		<div class="form">
+			<div class="form-cell">
+				<div class="label">
+					<text class="iconfont icon-user">&#xe6b5;</text>
+				</div>
+				<input class="input" v-model="form.phone" placeholder="用户名/邮箱" type="text">
+			</div>
+			<div class="form-cell">
+				<div class="label">
+					<text class="iconfont icon-password">&#xe603;</text>
+				</div>
+				<input class="input" v-model="form.password" v-if="showPassword" placeholder="密码" type="text">
+				<input class="input" v-model="form.password" v-else placeholder="密码" type="password">
+				<div class="exted" @click="showPassword = !showPassword">
+					<text class="iconfont icon-eye">{{showPassword ? '\uea3f' : '\ue723'}}</text>
+				</div>
+			</div>
+			<div class="form-cell-submit">
+				<div class="btn" @click="loginHandler">
+					<text class="btn-text">登录</text>
+				</div>
+				<div class="tips">
+					<text class="sigin">立即注册</text>
+					<text class="forget">忘记密码</text>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="other">
+				<image class="other-tips" src="../../static/images/other.jpg"></image>
+			</div>
+			<div class="footer-box">
+				<div>
+					<text class="iconfont icon-other">&#xe62f;</text>
+				</div>
+				<div>
+					<text class="iconfont icon-other">&#xe607;</text>
+				</div>
+				<div>
+					<text class="iconfont icon-other">&#xe65c;</text>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	const domModule = weex.requireModule('dom')
+	import api from '../../common/request/index.js'
+	import {clearTabView} from '../../common/common.js'
+	Vue.prototype.$api = api
+	export default {
+		data() {
+			return {
+				showPassword: false,
+				form: {
+					phone: '',
+					password: '',
+					clientid: '', // 设备cid
+					system: '' // ios or Android
+				},
+			}
+		},
+		created() {
+			clearTabView();
+		},
+		methods: {
+			loginHandler() {
+				this.form.clientid = plus.push.getClientInfo().clientid;
+				this.form.system = plus.os.name;
+				let index = 0;
+				let msgs = ['请输入用户名', '请输入密码', '设备id错误', '系统类型未能识别'];
+				for (let i in this.form) {
+					if (this.form[i] == '') {
+						uni.showToast({
+							icon: 'none',
+							title: msgs[index]
+						})
+						break;
+					}
+					index++;
+				}
+				if (index !== 4) {
+					return;
+				}
+				/*this.$api.getUserInfo(this.form).then(res => {
+					console.log(res.data);
+				})*/
+				uni.showLoading({
+					title: '登录中...'
+				})
+				setTimeout(() => {
+					if (this.form.phone == '17670755859' && this.form.password == '123456') {
+						uni.setStorage({
+							key: 'token',
+							data: 'eadasfddsfdgdffadsade',
+							success: function () {
+								uni.navigateBack()
+							}
+						});
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: '账号密码错误'
+						})
+						uni.hideLoading();
+					}
+				}, 1500)
+			}
+		},
+		beforeCreate() {
+			domModule.addRule('fontFace', {
+				'fontFamily': "iconfont",
+				'src': "url('https://at.alicdn.com/t/font_1209399_zdx7kh3k9dg.ttf')",
+			});
+		},
+	}
+</script>
+
+<style scoped>
+/* 字体图标 */
+	.iconfont {
+		font-family: iconfont;
+	}
+	
+.content{
+	flex: 1;
+	background-color: #ffffff;
+}
+
+.logo{
+	flex-direction: row;
+	justify-content: space-around;
+	padding-top: 50px;
+}
+
+.logo-tips{
+	width: 154px;
+	height: 144px;
+}
+
+.form{
+	padding-top: 40px;
+	margin-top: 100px;
+	margin-left: 75px;
+	margin-right: 75px;
+}
+
+.form-cell{
+	margin-bottom: 60px;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #DBDBDB;
+}
+
+.label{
+	width: 45px;
+}
+
+.icon-user{
+	font-size: 34px;
+	color: #C2C2C2;
+}
+
+.icon-password{
+	font-size: 34px;
+	color: #C2C2C2;
+}
+
+.icon-eye{
+	font-size: 34px;
+	color: #C2C2C2;
+}
+
+.input{
+	flex: 1;
+	height: 80px;
+	line-height: 80px;
+}
+
+.exted{
+	width: 60px;
+}
+
+.exted-eye{
+	width: 33px;
+	height: 21px;
+}
+
+.exted-eye-close{
+	width: 31px;
+	height: 12px;
+}
+
+.btn{
+	flex: 1;
+	align-items: center;
+	background-color: #FA9EB6;
+	text-align: center;
+	border-radius: 50px;
+}
+
+.btn-text{
+	text-align: center;
+	color: #ffffff;
+	font-size: 34px;
+	height: 90px;
+	line-height: 90px;
+}
+
+.tips{
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 25px;
+}
+
+.sigin{
+	font-size: 28px;
+	color: #8E8E8E;
+}
+
+.forget{
+	font-size: 28px;
+	color: #8E8E8E;
+}
+
+.footer{
+	margin-top: 200px;
+	margin-left: 75px;
+	margin-right: 75px;
+}
+
+.other{
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.other-tips{
+	width: 260px;
+	height: 25px;
+}
+
+.footer-box{
+	margin-top: 70px;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.icon-other{
+	font-size: 100px;
+	color: #cccccc;
+}
+</style>

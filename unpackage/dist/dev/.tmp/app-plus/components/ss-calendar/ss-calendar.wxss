@@ -1,0 +1,155 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.calendar__wrap.data-v-4b4bd9d7 {
+  background-color: #fff;
+  color: #333;
+}
+.calendar__wrap .header.data-v-4b4bd9d7 {
+    padding: 0 24rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border-bottom: 2rpx solid #eee;
+}
+.calendar__wrap .header .current-date.data-v-4b4bd9d7 {
+      text-align: center;
+      font-size: 34rpx;
+      padding: 32rpx 0;
+}
+.calendar__wrap .header .prev.data-v-4b4bd9d7,
+    .calendar__wrap .header .next.data-v-4b4bd9d7 {
+      margin: 0 30rpx;
+}
+.calendar__wrap .header .prev image.data-v-4b4bd9d7,
+      .calendar__wrap .header .next image.data-v-4b4bd9d7 {
+        width: 32rpx;
+        height: 32rpx;
+}
+.calendar__wrap .body .weeks.data-v-4b4bd9d7 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 30rpx;
+    padding: 32rpx 0;
+}
+.calendar__wrap .body .weeks .week__item.data-v-4b4bd9d7 {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      text-align: center;
+}
+.calendar__wrap .body .day__list.data-v-4b4bd9d7 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+}
+.calendar__wrap .body .day__list .day__item.data-v-4b4bd9d7 {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      width: 14.285%;
+      text-align: center;
+      padding: 30rpx 0;
+      font-size: 34rpx;
+}
+.calendar__wrap .body .day__list .day__item .checked.data-v-4b4bd9d7,
+      .calendar__wrap .body .day__list .day__item .current.data-v-4b4bd9d7 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        width: 56rpx;
+        height: 56rpx;
+        border-radius: 100%;
+        padding: 12rpx;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        background-color: #FA9EB6;
+        color: #fff;
+        font-size: 28rpx;
+}
+.calendar__wrap .footer.data-v-4b4bd9d7 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    font-size: 24rpx;
+    color: #B0A99E;
+    padding: 20rpx;
+}
+.calendar__wrap .footer .stadu.data-v-4b4bd9d7 {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+}
+.calendar__wrap .footer .stadu .badge.data-v-4b4bd9d7 {
+        width: 15rpx;
+        height: 15rpx;
+        border-radius: 50%;
+        margin-right: 10rpx;
+}
+.calendar__wrap .footer .stadu view.data-v-4b4bd9d7 {
+        vertical-align: middle;
+}
+.calendar__wrap .footer .stadu__item.data-v-4b4bd9d7 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+            -ms-flex-align: center;
+                align-items: center;
+        margin-right: 30rpx;
+}
+.calendar__wrap .footer .stadu__active .badge.data-v-4b4bd9d7 {
+        background-color: var(--prink-bg);
+}
+.calendar__wrap .footer .stadu__gray .badge.data-v-4b4bd9d7 {
+        background-color: #B0A99E;
+}
+.calendar__wrap .footer .stadu__line .badge.data-v-4b4bd9d7 {
+        border: 1px solid var(--prink-line);
+}
+.calendar__wrap .footer .record.data-v-4b4bd9d7 {
+      color: var(--prink);
+}
+

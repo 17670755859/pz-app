@@ -1,0 +1,1 @@
+<scroll-view class="scroll-box tab-pane-item data-v-6fb37fec" scroll-y bind:__l="__l"><slot></slot></scroll-view>

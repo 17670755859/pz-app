@@ -1,0 +1,49 @@
+.masonry .flex > view {
+  width: 49%;
+  margin-bottom: 20rpx;
+  background-color: #FFFFFF;
+}
+.masonry .flex > view:nth-child(2n) {
+  margin-left: 2%;
+}
+.masonry .flex > view image {
+  will-change: transform;
+}
+.masonry .flex .item {
+  margin-bottom: 20rpx;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0 4rpx 20rpx #EEEEEE;
+          box-shadow: 0 4rpx 20rpx #EEEEEE;
+}
+.masonry .flex .comment-text {
+  font-size: 24rpx;
+  color: #363636;
+  margin: 15rpx 0;
+  padding: 0 10rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.masonry .flex .info {
+  padding: 10rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.masonry .flex .info image {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0;
+}
+.masonry .flex .info text {
+  font-size: 22rpx;
+  color: #505050;
+  margin-left: 10rpx;
+}
+

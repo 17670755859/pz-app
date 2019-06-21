@@ -1,0 +1,44 @@
+.store.data-v-7e49a4ab {
+  background-color: #fff;
+  min-height: 100%;
+  padding-top: 100rpx;
+}
+.store-header.data-v-7e49a4ab {
+  text-align: center;
+}
+.store-header-name_title.data-v-7e49a4ab {
+  font-size: 54rpx;
+  color: #515151;
+}
+.store-header-name_tips.data-v-7e49a4ab {
+  font-size: 14rpx;
+  color: #686868;
+  margin-top: 10rpx;
+}
+.store-header-contact.data-v-7e49a4ab {
+  font-size: 20rpx;
+  color: #5b5b5b;
+  margin-top: 40rpx;
+}
+.store-header-contact .label.data-v-7e49a4ab {
+  font-size: 24rpx;
+  margin-right: 20rpx;
+}
+.store-header-contact-cell.data-v-7e49a4ab {
+  margin-top: 10rpx;
+}
+.store-header-division.data-v-7e49a4ab {
+  text-align: center;
+  margin-top: 50rpx;
+}
+.store-header-division image.data-v-7e49a4ab {
+  width: 690rpx;
+  height: 8rpx;
+}
+.store-content.data-v-7e49a4ab {
+  padding: 50rpx 23rpx;
+}
+.store-content ._img.data-v-7e49a4ab {
+  width: 100%;
+}
+

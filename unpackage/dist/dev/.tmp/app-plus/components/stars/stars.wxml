@@ -1,0 +1,1 @@
+<view class="stars data-v-6db6c5fa" bind:__l="__l"><block wx:for="{{stars}}" wx:for-item="star" wx:for-index="index" wx:key="index"><block class="data-v-6db6c5fa"><uni-icon class="stars-item data-v-6db6c5fa" type="star" size="26" color="{{star?'#FA9EB6':'#989898'}}" data-event-opts="{{[['^click',[['selectStars',[index]]]]]}}" bind:click="__e"></uni-icon></block></block></view>

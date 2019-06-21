@@ -1,0 +1,282 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.tabs.data-v-8a6f0982 {
+  height: 100%;
+  overflow: hidden;
+}
+.tabs .tab-pane-view.data-v-8a6f0982 {
+    position: relative;
+    height: calc(100% - 90rpx);
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+}
+.tabs .tab-pane-view .tab-pane-group.data-v-8a6f0982 {
+      white-space: nowrap;
+      -webkit-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s;
+      width: 100%;
+      overflow: visible;
+      will-change: transform, left, top;
+      min-height: 100rpx;
+      height: 100%;
+}
+/* 顶部tabbar */
+.nav-bar.data-v-8a6f0982 {
+  position: relative;
+  z-index: 10;
+  height: 90rpx;
+  white-space: nowrap;
+  -webkit-box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+          box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  background-color: #fff;
+}
+.nav-bar .nav-item.data-v-8a6f0982 {
+    display: inline-block;
+    margin: 0 auto;
+    width: 150rpx;
+    height: 90rpx;
+    text-align: center;
+    padding: 0 10rpx;
+    line-height: 90rpx;
+    font-size: 30rpx;
+    color: #303133;
+    position: relative;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.nav-bar .nav-item.data-v-8a6f0982:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-bottom: 4rpx solid #FA9EB6;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.nav-bar .current.data-v-8a6f0982 {
+    color: #FA9EB6;
+}
+.nav-bar .current.data-v-8a6f0982:after {
+    width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tabs.data-v-8a6f0982{
+		height: 100vh !important;
+}
+
+

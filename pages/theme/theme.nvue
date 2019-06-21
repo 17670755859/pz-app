@@ -1,0 +1,338 @@
+<template>
+	<div class="content">
+		<list>
+			<cell>
+				<image resize="cover" class="theme-banner" src="../../static/img/them-banner.jpg"></image>
+			</cell>
+			<header>
+				<scroller class="nav" scroll-direction="horizontal" show-scrollbar="false">
+					<div class="nav-item" v-for="(item, index) in tabBars" :key="item.id" :ref="'item'+index" @click="switchTabs($event, index)">
+						<text class="text" :class="[tabCurrentIndex == index ? 'active' : '']">{{item.name}}</text>
+					</div>
+				</scroller>
+			</header>
+			<cell v-for="(item, index) in dataList" :key="index" @click="seeThemeInfo">
+				<div class="theme-list">
+					<image class="theme-img" :src="item.url"></image>
+					<div class="theme-info">
+						<div class="theme-name">
+							<text class="theme-name-text">{{item.name}}</text>
+						</div>
+						<div class="theme-right">
+							<image class="love" src="../../static/images/love.png" v-if="!item.love"></image>
+							<image class="love-active" src="../../static/images/love-active.png" v-else></image>
+							<text class="love-text margin-left-5">{{item.loveNum}}</text>
+							<image class="see" src="../../static/images/theme-see-icon.png"></image>
+							<text class="see-text margin-left-5">{{item.see}}</text>
+						</div>
+					</div>
+				</div>
+			</cell>
+			
+			<!-- 加载更多组件 -->
+			<loading class="loading" @loading="loadThemeList" :display="tabBars[tabCurrentIndex].loadMoreStatus==1 ? 'show' : 'hide'">
+				<loading-indicator v-show="tabBars[tabCurrentIndex].loadMoreStatus == 1" class="loading-icon"></loading-indicator>
+				<text class="loading-text">{{tabBars[tabCurrentIndex].loadMoreStatus==0?'上拉显示更多':tabBars[tabCurrentIndex].loadMoreStatus==1?'正在加载..':'没有更多数据了'}}</text>
+			</loading>
+		</list>
+	</div>
+</template>
+
+<script>
+	import indexMixin from './index'
+	import uniTabBar from '@/components/tab-nvue/tabbar.nvue'
+	const domModule = weex.requireModule('dom')
+	import {createTabView,clearTabView} from '@/common/common'
+	import json from '@/Json'
+
+	export default {
+		/**
+		 * 大部分js可以复用vue中写的
+		 * 直接混入即可
+		 */
+		mixins: [indexMixin],
+		components: {
+			uniTabBar,
+		},
+		data() {
+			return {
+				dataList: []
+			}
+		},
+		beforeCreate() {
+			domModule.addRule('fontFace', {
+				'fontFamily': "iconfont",
+				'src': "url('https://at.alicdn.com/t/font_1209399_vkkyf5au3ui.ttf')",
+			});
+		},
+		created() {
+			//获取数据，方法通过mixin混入
+			this.loadTabbars();
+			this.dataList = json.themeList;
+		},
+		mounted() {
+			uni.getStorage({
+				key: 'token',
+				fail() {
+					createTabView();
+				}
+			})
+		},
+		methods: {
+			switchTabs(event, index) {
+				this.tabCurrentIndex = index;
+				const target = event.target;
+				
+				if (plus.os.name == 'Android') {
+					domModule.scrollToElement(target, {offset: -300});
+				}
+				
+				//第一次切换tab，动画结束后需要加载数据
+				let tabItem = this.tabBars[this.tabCurrentIndex];
+				
+				let list = json.themeList;
+				list.sort((a, b) => {
+					return Math.random() > .5 ? -1 : 1; //静态数据打乱顺序
+				})
+				this.dataList = list;
+				
+				return;
+				if (this.tabCurrentIndex !== 0 && tabItem.loaded !== true) {
+					this.loadThemeList();
+					tabItem.loaded = true;
+				}
+			},
+			
+			// 查看详情
+			seeThemeInfo() {
+				uni.navigateTo({
+					url: "/pages/theme-info/theme-info"
+				})
+			}
+		},
+		beforeDestroy() {
+			clearTabView();
+		}
+	}
+</script>
+
+<style>
+	/* 字体图标 */
+	.iconfont {
+		font-family: iconfont;
+	}
+
+	.content {
+		flex: 1;
+		background-color: #fff;
+	}
+
+	.theme-banner {
+		width: 750px;
+		height: 280px;
+	}
+
+	.nav{
+		flex-direction: row;
+		height: 90px;
+		background-color: #FFFFFF;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-bottom-color: #CCCCCC;
+	}
+
+	.nav-item {
+		height: 90px;
+		line-height: 90px;
+		min-width: 100px;
+		margin: 0 10px;
+	}
+
+	.text {
+		height: 90px;
+		line-height: 90px;
+		font-size: 30px;
+		text-align: center;
+	}
+
+	.active{
+		color: #FA9EB6;
+		font-weight: bold;
+		border-bottom-style: solid;
+		border-bottom-width: 3px;
+		border-bottom-color: #FA9EB6;
+	}
+
+	/* 下拉刷新 加载更多 */
+	.loading {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: 750px;
+		height: 80px;
+	}
+	
+	.loading-text {
+		font-size: 28px;
+		color: #888;
+	}
+	
+	.loading-icon {
+		height: 40px;
+		width: 40px;
+		color: #999999;
+		margin-right: 10px;
+	}
+
+
+	/* 社区列表  */
+	.community-list {
+		flex: 1;
+		padding: 23px;
+		background-color: #fff;
+		margin-top: 20px;
+	}
+
+	.community-header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.community-header-user {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.community-header-user-info {
+		margin-left: 30px;
+	}
+
+	.community-header-user-info-name {
+		font-size: 33px;
+		color: #3d3d3d;
+	}
+
+	.community-header-user-info-time {
+		font-size: 25px;
+		color: #B0B0B0;
+		margin-top: 4px;
+	}
+
+	.community-header-operate-follow {
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		border-style: solid;
+		border-width: 1px;
+		border-color: #FA9EB6;
+		border-radius: 10px;
+		padding: 10px;
+	}
+
+	.community-header-operate-follow-iconfont {
+		font-size: 24px;
+		color: #FA9EB6;
+	}
+
+	.community-header-operate-follow-text {
+		font-size: 24px;
+		color: #FA9EB6;
+	}
+
+	.community-body {
+		margin-top: 20px;
+	}
+
+	.community-body-content-text {
+		border-style: solid;
+		border-width: 1px;
+		border-color: transparent;
+		font-size: 30px;
+		color: #373737;
+		lines: 3
+	}
+
+	.community-body-image {
+		border-style: solid;
+		border-color: transparent;
+		border-width: 1px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-top: 20px;
+	}
+
+	.community-body-image-item {
+		flex: 1;
+		margin: 0 5px;
+		height: 230px;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+
+	/* 主题列表 */
+	.list {
+		width: 750px;
+		padding-top: 20px;
+	}
+
+	.theme-list {
+		padding: 20px 30px 0;
+	}
+
+	.theme-img {
+		height: 400px;
+	}
+
+	.theme-info {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 15px 0;
+	}
+
+	.theme-name-text {
+		font-size: 31px;
+		color: #181818;
+	}
+
+	.theme-right {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.love {
+		width: 30px;
+		height: 28px;
+	}
+
+	.love-active {
+		width: 30px;
+		height: 26px;
+	}
+
+	.love-text {
+		font-size: 23px;
+		color: #b2b2b2;
+	}
+
+	.see {
+		width: 35px;
+		height: 25px;
+		margin-left: 20px;
+	}
+
+	.see-text {
+		font-size: 23px;
+		color: #b2b2b2;
+	}
+
+	.margin-left-5 {
+		margin-left: 5px;
+	}
+</style>

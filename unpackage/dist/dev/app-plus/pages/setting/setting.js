@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"content.",[1],"data-v-3a3a6b0d { padding-top: ",[0,25],"; }\n.",[1],"uni-padding-wrap.",[1],"data-v-3a3a6b0d { padding: ",[0,30],"; }\n",],undefined,{path:"./pages/setting/setting.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/setting/setting.wxml') } }));

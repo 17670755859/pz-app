@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "门店列表",
+  "titleNView": {
+    "buttons": [
+      {
+        "type": "menu"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,44 @@
+.content.data-v-2507aaea {
+  min-height: 100%;
+  background-color: #FFFFFF;
+}
+.header.data-v-2507aaea {
+  font-size: 34rpx;
+  text-align: center;
+  padding: 40rpx 0;
+}
+.list.data-v-2507aaea {
+  padding: 20rpx;
+}
+.list-item.data-v-2507aaea {
+  position: relative;
+  border: 1px solid #aaaaaa;
+  padding: 20rpx;
+  margin-bottom: 40rpx;
+}
+.list-item-img image.data-v-2507aaea {
+  width: 100%;
+}
+.list-item-tips.data-v-2507aaea {
+  display: block;
+  margin: 0 auto;
+  width: 483rpx;
+  height: 90rpx;
+  margin-top: 40rpx;
+}
+.list-item-yuanchuang.data-v-2507aaea {
+  display: block;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  width: 674rpx;
+  height: 84rpx;
+}
+.horizontal.data-v-2507aaea {
+  text-align: center;
+  margin: 130rpx 0;
+}
+.horizontal image.data-v-2507aaea {
+  width: 704rpx;
+  height: 173rpx;
+}
+

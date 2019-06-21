@@ -1,0 +1,21 @@
+{
+  "titleNView": {
+    "searchInput": {
+      "backgroundColor": "#EEEEEE",
+      "borderRadius": "16px",
+      "placeholder": "搜索主题风格 最新主题",
+      "disabled": false,
+      "placeholderColor": "#BBB9BD",
+      "align": "left"
+    },
+    "buttons": [
+      {
+        "text": "取消",
+        "fontSize": "16",
+        "color": "#F7A8BD",
+        "background": "rgba(0,0,0,0)"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

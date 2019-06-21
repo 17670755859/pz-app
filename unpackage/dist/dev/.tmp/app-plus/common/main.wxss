@@ -1,0 +1,391 @@
+/*每个页面公共css */
+page {
+	background-color: #f1f1f1;
+	font-size: 28rpx;
+	color: #333;
+	font-family: Helvetica Neue, Helvetica, sans-serif;
+	height: 100%;
+	--prink: #FA9EB6;
+	--prink-line: #FA9EB6;
+	--prink-bg: #FA9EB6;
+}
+view {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.bg-prink {
+	background-color: var(--prink-bg);
+	border: 1px solid var(--prink-line);
+	color: #FFFFFF;
+}
+.borderRadius {
+	border-radius: 50rpx;
+}
+.flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+.prink {
+	color: var(--prink);
+}
+.space-around {
+	-webkit-justify-content: space-around;
+	    -ms-flex-pack: distribute;
+	        justify-content: space-around;
+}
+.text-center {
+	text-align: center;
+}
+.card-swiper {
+	height: 420rpx !important;
+}
+.card-swiper .swiper-box {
+	width: 610rpx !important;
+	left: 70rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	padding: 40rpx 0rpx 70rpx;
+	overflow: initial;
+}
+.card-swiper .swiper-box .swiper-item {
+	width: 100%;
+	display: block;
+	height: 100%;
+	border-radius: 10rpx;
+	-webkit-transform: scale(0.9);
+	    -ms-transform: scale(0.9);
+	        transform: scale(0.9);
+	-webkit-transition: all 0.2s ease-in 0s;
+	-o-transition: all 0.2s ease-in 0s;
+	transition: all 0.2s ease-in 0s;
+	overflow: hidden;
+}
+.card-swiper .swiper-box.cur .swiper-item {
+	-webkit-transform: none;
+	    -ms-transform: none;
+	        transform: none;
+	-webkit-transition: all 0.2s ease-in 0s;
+	-o-transition: all 0.2s ease-in 0s;
+	transition: all 0.2s ease-in 0s;
+}
+image {
+	max-width: 100%;
+	display: inline-block;
+	position: relative;
+	z-index: 0;
+}
+.swiper-item image {
+	width: 100%;
+	display: block;
+	height: 100%;
+	margin: 0;
+	pointer-events: none;
+}
+.card {
+	border-radius: 10rpx;
+	overflow: hidden;
+}
+.box-shadow {
+	-webkit-box-shadow: 0rpx 40rpx 100rpx 0rpx rgba(0, 0, 0, 0.07);
+	        box-shadow: 0rpx 40rpx 100rpx 0rpx rgba(0, 0, 0, 0.07);
+}
+/* 公共颜色 */
+.btn-bg-pink {
+	background-color: var(--prink) !important;
+}
+.btn-bg-pink::after {
+	content: " ";
+	width: 200%;
+	height: 200%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 1px solid var(--prink) !important;
+	-webkit-transform: scale(.5);
+	-ms-transform: scale(.5);
+	    transform: scale(.5);
+	-webkit-transform-origin: 0 0;
+	-ms-transform-origin: 0 0;
+	    transform-origin: 0 0;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	border-radius: 10px;
+}
+.swiper-mendian .uni-swiper-dot-active {
+	width: 36rpx;
+	height: 16rpx;
+	border-radius: 8rpx;
+	background-color: red !important;
+	background-color: #FAA2B9;
+	background-image: -o-linear-gradient(top, #FAC5D3, #FAA2B9);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FAC5D3), to(#FAA2B9));
+	background-image: linear-gradient(top, #FAC5D3, #FAA2B9);
+	background-repeat: repeat-x;
+}
+page {
+  height: 100%;
+}
+.load-more {
+  text-align: center;
+  font-size: 25rpx;
+  color: #787878;
+  margin: 100rpx 0;
+}
+.footer-content .pz-footer-logo {
+  text-align: center;
+}
+.footer-content .pz-footer-logo image {
+  width: 265rpx;
+  height: 94rpx;
+}
+.footer-content .pz-footer-tips {
+  text-align: center;
+  margin-top: 70rpx;
+}
+.footer-content .pz-footer-tips image {
+  width: 705rpx;
+  height: 31rpx;
+}
+.footer-content .form {
+  width: calc(100% - 56rpx);
+  padding-top: 50rpx;
+  padding-bottom: 75rpx;
+  border-bottom: 1px dashed #CCCCCC;
+  margin: 45rpx auto 0;
+}
+.footer-content .form-cell {
+  margin-bottom: 40rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.footer-content .form-cell input {
+  border: 1px solid #ccc;
+  padding: 15rpx 10rpx;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.footer-content .form-cell .code {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 200rpx;
+  color: #212121;
+  font-size: 28rpx;
+  background-color: #C5C5C5;
+  border-radius: 8rpx;
+  text-align: center;
+  margin-left: 18rpx;
+}
+.footer-content .form-cell .code text {
+  width: 100%;
+}
+.footer-content .form-cell .submit {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: var(--prink-bg);
+  color: #FFFFFF;
+  font-size: 32rpx;
+  border-radius: 4rpx;
+}
+.footer-content .footer {
+  margin-top: 70rpx;
+  text-align: center;
+  padding: 0 20rpx;
+  padding-bottom: 80rpx;
+}
+.footer-content .footer .h4 {
+  font-size: 28rpx;
+  color: #2f2f2f;
+}
+.footer-content .footer .h1 {
+  font-size: 74rpx;
+  color: #515151;
+}
+.footer-content .footer .h6 {
+  font-size: 18rpx;
+  color: #5b5b5b;
+}
+.footer-content .footer .topLog {
+  margin-top: 60rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+	全局公共样式和字体图标
+*/
+@font-face {
+	font-family: 'iconfont';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://at.alicdn.com/t/font_1209399_l2zitxjkco.ttf') format('truetype');
+}
+.iconfont {
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.icon-close:before {
+	content: "\E849";
+}
+.icon-member:before {
+	content: "\E641";
+}
+.icon-message:before {
+	content: "\E644";
+}
+.icon-add:before{
+	content: "\E62B";
+}
+.icon-arrowRight:before {
+	content: '\E600';
+}
+.icon-edit-line:before {
+	content: '\E63B';
+}
+.icon-mail:before {
+	content: '\E7DE';
+}
+.icon-address:before {
+	content: '\E62C';
+}
+

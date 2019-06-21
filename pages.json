@@ -1,0 +1,502 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {
+							"backgroundColor": "#EEEEEE",
+							"borderRadius": "16px",
+							"placeholder": "搜索主题风格 最新主题",
+							"disabled": true,
+							"placeholderColor": "#BBB9BD",
+							"align": "left"
+						},
+						"buttons": [{
+								"fontSrc": "/static/fonts/iconfont.ttf",
+								"text": "\ue644",
+								"fontSize": "26",
+								"color": "#5B5356",
+								"redDot": true,
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					}
+				}
+			}
+		}, {
+			"path": "pages/theme/theme",
+			"style": {
+				// #ifdef H5
+				"navigationBarTitleText": "主题",
+				// #endif
+				"app-plus": {
+					"titleNView": {
+						// #ifdef APP-PLUS
+						"searchInput": {
+							"backgroundColor": "#EEEEEE",
+							"borderRadius": "16px",
+							"placeholder": "搜索主题关键词...",
+							"disabled": false,
+							"placeholderColor": "#BBB9BD",
+							"align": "left"
+						}
+						// #endif
+					},
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/dress/dress",
+			"style": {
+				"navigationBarTitleText": "变装"
+			}
+		}, {
+			"path": "pages/community/community",
+			"style": {
+				"navigationBarTitleText": "社区",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+								"fontSrc": "/static/fonts/iconfont.ttf",
+								"text": "\ue628",
+								"fontSize": "22",
+								"color": "#1E1E1E",
+								"background": "rgba(0,0,0,0)"
+							}
+						]
+					},
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/personal/personal",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#F6F6F6",
+				"app-plus": {
+					"titleNView": null,
+					"bounce":"none"
+					// "titleNView": {
+					// 	"type": "transparent",
+					// 	"buttons": [{
+					// 			"fontSrc": "/static/fonts/iconfont.ttf",
+					// 			"text": "\ue644",
+					// 			"fontSize": "26",
+					// 			"color": "#303133",
+					// 			"background": "rgba(0,0,0,0)",
+					// 			"redDot": true
+					// 		},{
+					// 			"fontSrc": "/static/fonts/iconfont.ttf",
+					// 			"text": "\ue78e",
+					// 			"fontSize": "26",
+					// 			"color": "#303133",
+					// 			"width": "46px",
+					// 			"background": "rgba(0,0,0,0)"
+					// 		}
+					// 	]
+					// }
+				}
+			}
+		}, {
+			"path": "pages/community-info/community-info",
+			"style": {
+				"navigationBarTitleText": "动态详情",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"type": "share"
+						}]
+					},
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {
+							"backgroundColor": "#EEEEEE",
+							"borderRadius": "16px",
+							"placeholder": "搜索主题风格 最新主题",
+							"disabled": false,
+							"placeholderColor": "#BBB9BD",
+							"align": "left"
+						},
+						"buttons": [{
+							"text": "取消",
+							"fontSize": "16",
+							"color": "#F7A8BD",
+							"background": "rgba(0,0,0,0)"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/community-publish/community-publish",
+			"style": {
+				"navigationBarTitleText": "发布文章",
+				"navigationBarBackgroundColor": "#F6F6F6",
+				"app-plus": {
+					// #ifdef APP-PLUS
+					"titleNView": false,
+					"navigationBarTextStyle": "black",
+					// #endif
+					"bounce":"none"
+					// "titleNView": {
+					// 	"buttons": [{
+					// 		"text": "发布",
+					// 		"color": "#898989",
+					// 		"fontSize": "17px"
+					// 	}]
+					// }
+				}
+			}
+		}, {
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			}
+		}, {
+			"path": "pages/setting/setting",
+			"style": {
+				"navigationBarTitleText": "账户设置"
+			}
+		}, {
+			"path": "pages/settingInfo/settingInfo",
+			"style": {
+				"navigationBarTitleText": "个人资料"
+			}
+		}, {
+			"path": "pages/removeNickname/removeNickname",
+			"style": {
+				"navigationBarTitleText": "修改昵称",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "保存",
+							"fontSize": "16"
+						}]
+					}
+				}
+			}
+		}, {
+			"path": "pages/message-list/message-list",
+			"style": {
+				"navigationBarTitleText": "消息列表"
+			}
+		}, {
+			"path": "pages/myCoupon/myCoupon",
+			"style": {
+				"navigationBarTitleText": "我的优惠券"
+			}
+		}, {
+			"path": "pages/order-comment/order-comment",
+			"style": {
+				"navigationBarTitleText": "订单评论",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "提交",
+							"color": "#FA9EB6",
+							"fontSize": "16px"
+						}]
+					}
+				}
+			}
+		}
+	    ,{
+            "path" : "pages/publish-list/publish-list",
+            "style" : {
+							"navigationBarTitleText": "我发布的",
+							"app-plus": {
+								"titleNView": {
+									"buttons": [{
+										"type": "menu"
+									}]
+								}
+							}
+						}
+        }
+        ,{
+            "path" : "pages/product-list/product-list",
+            "style" : {
+							"navigationBarTitleText": "产品列表",
+							"app-plus": {
+								"titleNView": {
+									"buttons": [{
+										"type": "menu"
+									}]
+								}
+							}
+						}
+        }
+        ,{
+            "path" : "pages/product-info/product-info",
+            "style" : {
+							"navigationBarTitleText": "产品详情",
+							"titleNView": {
+								"type": "transparent",
+								"buttons": [{
+									"type": "menu"
+								}]
+							}
+						}
+        }
+        ,{
+            "path" : "pages/sign/sign",
+            "style" : {
+							"navigationBarTextStyle": "white",
+							"navigationBarTitleText": "任务中心",
+							"navigationBarBackgroundColor": "#FA9EB6",
+							"app-plus": {
+								"titleNView": {
+									"buttons": [{
+										"text": "签到规则",
+										"color": "#FFFFFF",
+										"fontSize": "16px",
+										"width": "80px"
+									}]
+								}
+							}
+						}
+        }
+        ,{
+            "path" : "pages/register/register",
+            "style" : {
+							"navigationBarTitleText": "注册"
+						}
+        }
+        ,{
+            "path" : "pages/login/login",
+            "style" : {
+							"navigationBarTitleText": ""
+						}
+        }
+        ,{
+            "path" : "pages/setting-password/setting-password",
+            "style" : {
+							"navigationBarTitleText": "忘记密码"
+						}
+        }
+        ,{
+            "path" : "pages/integral-list/integral-list",
+            "style" : {
+							"navigationBarTitleText": "积分商城"
+						}
+        }
+        ,{
+            "path" : "pages/integral-info/integral-info",
+            "style" : {
+							"navigationBarTitleText": "商品详情",
+							"titleNView": {
+								"type": "transparent",
+								"buttons": [{
+									"type": "menu"
+								}]
+							}
+						}
+        }
+        ,{
+            "path" : "pages/store-list/store-list",
+            "style" : {
+							"navigationBarTitleText": "门店列表",
+							"app-plus": {
+								"titleNView": {
+									"buttons": [
+										{
+											"type": "menu"
+										}
+									]
+								}
+							}
+						}
+        }
+        ,{
+            "path" : "pages/store-info/store-info",
+            "style" : {
+							"navigationBarTitleText": "门店详情",
+							"app-plus": {
+								"titleNView": {
+									"buttons": [
+										{
+											"type": "menu"
+										}
+									]
+								}
+							}
+						}
+        }
+        ,{
+            "path" : "pages/photo/photo",
+            "style" : {
+							"navigationBarTitleText": "我的照片"
+						}
+        }
+        ,{
+            "path" : "pages/removePassword/removePassword",
+            "style" : {
+							"navigationBarTitleText": "修改密码"
+						}
+        }
+        ,{
+            "path" : "pages/wedding/wedding",
+            "style" : {
+							"navigationBarTitleText": "最新客片",
+							"app-plus": {
+								"titleNView": {
+									"buttons": [
+										{
+											"type": "menu"
+										}
+									]
+								}
+							}
+						}
+        }
+        ,{
+            "path" : "pages/videos/videos",
+            "style" : {
+							"navigationBarTitleText": "视频列表"
+						}
+        }
+        ,{
+            "path" : "pages/hanfu/hanfu",
+            "style" : {
+							"navigationBarTitleText": "汉服"
+						}
+        }
+        ,{
+            "path" : "pages/yshz/yshz",
+            "style" : {
+							"navigationBarTitleText": "影视合作"
+						}
+        }
+        ,{
+            "path" : "pages/mxhz/mxhz",
+            "style" : {
+							"navigationBarTitleText": "明星合作"
+						}
+        }
+        ,{
+            "path" : "pages/cross-dress/cross-dress",
+            "style" : {
+							"navigationBarTitleText": "变装"
+						}
+        }
+        ,{
+            "path" : "pages/receiving-address/receiving-address",
+            "style" : {
+							"navigationBarTitleText": "收货地址",
+							"navigationBarBackgroundColor":"#F8F8F8",
+							"app-plus": {
+								"bounce":"none"
+							}
+						}
+        }
+        ,{
+            "path" : "pages/addRess/addRess",
+            "style" : {
+							"navigationBarTitleText": "新建收货地址",
+							"app-plus": {
+								"titleNView": {
+									"buttons": [
+										{
+											"text": "保存",
+											"fontSize":"17",
+											"color":"#FA9EB6"
+										}
+									]
+								}
+							}
+							
+						}
+        }
+        ,{
+            "path" : "pages/theme-info/theme-info",
+            "style" : {
+							"navigationBarTitleText":"主题详情"
+						}
+        }
+        ,{
+            "path" : "pages/ours/ours",
+            "style" : {
+							"navigationBarTitleText":"关于我们"
+						}
+        }
+        ,{
+            "path" : "pages/collection/collection",
+            "style" : {
+							"navigationBarTitleText":"我的收藏"
+						}
+        }
+        ,{
+            "path" : "pages/ranking-list/ranking-list",
+            "style" : {
+							"navigationBarTitleText":"排行榜"
+						}
+        }
+        ,{
+            "path" : "pages/exchange/exchange",
+            "style" : {
+							"navigationBarTitleText":"确认兑换"
+						}
+        }
+        ,{
+            "path" : "pages/wedding-info/wedding-info",
+            "style" : {
+							"navigationBarTitleText":"客片详情"
+						}
+        }
+    ],
+	"tabBar": {
+		"color": "#B3B3B3",
+		"selectedColor": "#F2ADBA",
+		"backgroundColor": "#fff",
+		"borderStyle": "white",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/images/tabBar-index.png",
+				"selectedIconPath": "static/images/tabBar-index-active.png"
+			},
+			{
+				"pagePath": "pages/theme/theme",
+				"text": "主题",
+				"iconPath": "static/images/tabBar-theme.png",
+				"selectedIconPath": "static/images/tabBar-theme-active.png"
+			},
+			{
+				"pagePath": "pages/community/community",
+				"text": "社区",
+				"iconPath": "static/images/tabBar-community.png",
+				"selectedIconPath": "static/images/tabBar-community-active.png"
+			},
+			{
+				"pagePath": "pages/personal/personal",
+				"text": "我的",
+				"iconPath": "static/images/tabBar-my.png",
+				"selectedIconPath": "static/images/tabBar-my-active.png"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#ffffff"
+	},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [{
+			"name": "", //模式名称
+			"path": "", //启动页面，必选
+			"query": "" //启动参数，在页面的onLoad函数里面得到
+		}]
+	}
+}

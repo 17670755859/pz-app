@@ -1,0 +1,125 @@
+body {
+	background-color: #f1f1f1;
+	font-size: 28upx;
+	color: #333;
+	font-family: Helvetica Neue, Helvetica, sans-serif;
+	height: 100%;
+	--prink: #FA9EB6;
+	--prink-line: #FA9EB6;
+	--prink-bg: #FA9EB6;
+}
+
+view {
+	box-sizing: border-box;
+}
+
+.bg-prink {
+	background-color: var(--prink-bg);
+	border: 1px solid var(--prink-line);
+	color: #FFFFFF;
+}
+
+.borderRadius {
+	border-radius: 50upx;
+}
+
+.flex {
+	display: flex;
+}
+
+.prink {
+	color: var(--prink);
+}
+
+.space-around {
+	justify-content: space-around;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.card-swiper {
+	height: 420upx !important;
+}
+
+.card-swiper .swiper-box {
+	width: 610upx !important;
+	left: 70upx;
+	box-sizing: border-box;
+	padding: 40upx 0upx 70upx;
+	overflow: initial;
+}
+
+.card-swiper .swiper-box .swiper-item {
+	width: 100%;
+	display: block;
+	height: 100%;
+	border-radius: 10upx;
+	transform: scale(0.9);
+	transition: all 0.2s ease-in 0s;
+	overflow: hidden;
+}
+
+.card-swiper .swiper-box.cur .swiper-item {
+	transform: none;
+	transition: all 0.2s ease-in 0s;
+}
+
+image {
+	max-width: 100%;
+	display: inline-block;
+	position: relative;
+	z-index: 0;
+}
+
+.swiper-item image {
+	width: 100%;
+	display: block;
+	height: 100%;
+	margin: 0;
+	pointer-events: none;
+}
+
+.card {
+	border-radius: 10upx;
+	overflow: hidden;
+}
+
+.box-shadow {
+	box-shadow: 0upx 40upx 100upx 0upx rgba(0, 0, 0, 0.07);
+}
+
+/* 公共颜色 */
+.btn-bg-pink {
+	background-color: var(--prink) !important;
+}
+
+.btn-bg-pink::after {
+	content: " ";
+	width: 200%;
+	height: 200%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 1px solid var(--prink) !important;
+	-webkit-transform: scale(.5);
+	transform: scale(.5);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	box-sizing: border-box;
+	border-radius: 10px;
+}
+
+.swiper-mendian .uni-swiper-dot-active {
+	width: 36upx;
+	height: 16upx;
+	border-radius: 8upx;
+	background-color: red !important;
+	background-color: #FAA2B9;
+	background-image: -webkit-linear-gradient(top, #FAC5D3, #FAA2B9);
+	background-image: -o-linear-gradient(top, #FAC5D3, #FAA2B9);
+	background-image: -ms-linear-gradient(top, #FAC5D3, #FAA2B9);
+	background-image: linear-gradient(top, #FAC5D3, #FAA2B9);
+	background-repeat: repeat-x;
+}

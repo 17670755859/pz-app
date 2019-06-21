@@ -1,0 +1,294 @@
+<template>
+	<div class="content">
+		<!-- 
+			weex组件文档
+			https://weex.apache.org/zh/docs/components/slider.html
+		--> 
+		
+		<!-- 标题栏 -->
+		<div class="page-header">
+			<!-- 状态栏占位 -->
+			<div :style="{ height: statusBarHeight }"></div>
+			<div class="page-header-wrapper">
+				<div class="page-header-left" @click="goBackHandler">
+					<text class="logo">取消</text>
+					<!-- <text class="logo yticon">&#xe615;</text> -->
+				</div>
+				<div class="page-header-center">
+					<!-- <text class="search-input">输入关键字搜索</text> -->
+				</div>
+				<div class="page-header-right" @click="publishHandler">
+					<!-- <image class="contribute-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC20lEQVRoQ+1Y7VEVQRDsjkAzUCNQIgAjUCNQIhAjECNQIhAjQCIQMsAIxAwggraa2qXO43bvdu+LenVbxQ/q7e5Nz/TM9CyxI4s7ggMbkMcWyS0iW0Rm8sBGrZkcW33tqIhIeg7gI4BXHRZcATgheV1tXcHBaiCSbPwvAE8z37sB8JqkQc26qoBIsvF/AohbAF2GGugTAI7IHkmDmm0VAwkgHIlIp3ckf7YtDBG7CGCuSO7NhgIolyiSvgP4EIz6RPJbykBJ3uf9XqckD+cCk42IJCfyEQAndXv9IBkBJe2TdAzg80gApq4dcZK6JwlE0lsAZ4mD5yT9+6Al6RTA+0Gb85s6aewjOSDm/RsAvwE0c+CCpLlftELOHPRUudSdPrcPIOnAHBAb68NfSJoeq60GPS9JGtSDtQFZMjxTRcQNrS0z/L9Lb7LJhZxwjsV+48pjjhd3+amApJx/SNLV6L8V9Jd7RyeXATj3fHawBhsLxJ50kndpKRtx1I5Ih/5qypcoWQy8SIONAlKTA5JMm5cADOC43fUlubl+DXcPli2LAmnJkWTjajXaTnp20DWqg/LyWxqRRjSSH4t3Soo9qnevzywdEQVDs0IyGHZPMZK9Cnw0EEn7JC+HREdSBOJBKithJLmieRTA7EAaQm+QRJHkSuRBqnd/w8O3JHMT5p0PR0WkgsdRZF6TfJGLoiSX72cASkeB8mSvAHJPl9wQ1ZL0vTRcPCLhg825w3nixL+TJKFZuofEjj8oGmsBMd8Nxhort849Lg99kFg0R5pWh+boJuY8aK6/oeM/0Gg9OVXfEEtzpMuQQKdYlW5qlO8q1BrSb2r2rEatGmMfNbWmAjQ2IrGUumMXT3VTgQj3+F3Nf8mSnXt88CAUnzwntqvqOs84B6mC0ffSaC/4NTE1tlZZVHHIDvVLY3I87pXQFR9d5cgGZBW3Zz66RWSLyEwe2Kg1k2Orr92ZiPwDeAycQswzKBAAAAAASUVORK5CYII=" /> -->
+					<text :class="[form.content ? 'contribute-text-active' : 'contribute-text']">发布</text>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 发布框 -->
+		<div class="publish-content">
+			<textarea class="textarea" v-model="form.content" rows="6" placeholder="说点什么吧..."></textarea>
+			<div class="images" ref="box">
+				<div class="img-box" :style="{width: boxWidth + 'px'}" v-for="(item, index) in images" :key="index">
+					<image resize="cover" :style="{width: (boxWidth - 10) + 'px'}" class="img" :src="item"></image>
+					<text class="delete-img iconfont" @click="deleteImgHandler(index)">&#xe633;</text>
+				</div>
+				<div class="img-box publish-box" @click="addImgHandler">
+					<div class="publish-box-add" :style="{width: boxWidth + 'px'}">
+						<text class="iconfont icon-add">&#xe62b;</text>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 附加信息 -->
+		<div class="themes">
+			<div class="themes-cell">
+				<div class="let-content">
+					<text class="iconfont iconfont-sm">&#xe714;</text>
+					<text class="label">添加标签</text>
+				</div>
+				<text class="iconfont iconfont-arrow-right">&#xe600;</text>
+			</div>
+			<div class="themes-cell">
+				<div class="let-content">
+					<text class="iconfont iconfont-sm">&#xe647;</text>
+					<text class="label">我的位置</text>
+				</div>
+				<text class="iconfont iconfont-arrow-right">&#xe600;</text>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	const dom = weex.requireModule('dom')
+	export default {
+		data(){
+			return {
+				statusBarHeight: '0wx', //状态栏占位高度
+				form: {
+					content: ''
+				},
+				boxWidth: 0,
+				images: []
+			}
+		},
+		beforeCreate(){
+			dom.addRule('fontFace', {
+			    'fontFamily': "iconfont",
+			    'src': "url('https://at.alicdn.com/t/font_1209399_r3baoc5j7ca.ttf')",
+			});
+		},
+		created() {
+			//获取状态栏高度给顶部占位节点
+			uni.getSystemInfo({
+				success: res=>{
+					this.statusBarHeight = res.statusBarHeight + 'wx';
+				}
+			})
+		},
+		mounted() {
+			const result = dom.getComponentRect(this.$refs.box, option => {
+				this.boxWidth = (option.size.width - 36)/3;
+			})
+		},
+		methods: {
+			// 返回上一页
+			goBackHandler() {
+				uni.navigateBack()
+			},
+			
+			// 发布文章
+			publishHandler() {
+				if (this.form.content) {
+					plus.nativeUI.toast('发布成功!', {
+						verticalAlign: 'center'
+					})
+				}
+			},
+			
+			// 添加上传图片
+			addImgHandler() {
+				let that = this;
+				uni.chooseImage({
+					count: 9,
+					success(files) {
+						const tempFilePaths = files.tempFilePaths;
+						that.images = tempFilePaths;
+					}
+				})
+			},
+			
+			// 删除图片
+			deleteImgHandler(index) {
+				this.images.splice(index, 1);
+			}
+		}
+	}
+</script>
+
+<style>
+	/* 字体图标 */
+	.iconfont {
+		font-family: iconfont;
+	}
+	/**
+	 * weex css限制
+	 * 选择器不支持嵌套
+	 * 子节点不继承父节点样式（重要）
+	 * 仅支持 flex布局 （这个还不错）， 默认为display:flex; flex-direction:column;
+	 * 
+	 * 注：我对weex也是一知半解，有说错的麻烦指出
+	 */
+
+	.content{
+		flex: 1;
+		background-color: #fff;
+	}
+	/* 顶部标题栏 */
+	.page-header{
+		background-color: #F6F6F6;
+	}
+	.page-header-wrapper{
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		height: 100px;
+		padding: 0px 20px;
+	}
+	.page-header-left{
+		opacity: 0.9;
+	}
+	.logo{
+		font-size: 34px;
+		color: #090909;
+	}
+	.page-header-center{
+		flex: 1;
+		padding: 0px 30px 0 20px;
+	}
+	.search-input{
+		height: 60px;
+		font-size:28px;
+		color: #fff;
+		text-align: center;
+		line-height: 60px;
+		background-color: rgba(255,255,255,.2);
+		border-radius: 100px;
+	}
+	.page-header-right{
+		/* width: 50px; */
+		align-items: center;
+	}
+	.contribute-icon{
+		width: 50px;
+		height: 44px;
+	}
+	.contribute-text{
+		font-size: 32px;
+		color: #898989;
+	}
+	
+	.contribute-text-active{
+		font-size: 32px;
+		color: #090909;
+	}
+	/* 发布框样式 */
+	.publish-content{
+		padding: 40px;
+	}
+	.textarea {
+    font-size: 34px;
+    flex: 1;
+    color: #717171;
+  }
+	
+	.images{
+		position: relative;
+		margin-top: 10px;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+	}
+	
+	.img-box{
+		position: relative;
+		display: flex;
+		justify-content: flex-end;
+		height: 230px;
+		overflow: hidden;
+	}
+	
+	.img{
+		height: 220px;
+		vertical-align: middle;
+		border-width: 1px;
+		border-radius: 10px;
+		border-style: solid;
+		border-color: transparent;
+	}
+	
+	.publish-box{
+		height: 230px;
+	}
+	
+	.publish-box-add{
+		background-color: #EDEDED;
+		height: 220px;
+		line-height: 220px;
+		display: flex;
+		justify-content: flex-end;
+	}
+	
+	.icon-add{
+		border-radius: 10px;
+		font-size: 100px;
+		color: #CFCFCF;
+		line-height: 220px;
+		text-align: center;
+	}
+	
+	.delete-img{
+		position: absolute;
+		z-index: 9;
+		right: 0;
+		top: 0;
+		font-size: 40px;
+		color: #FA9EB6;
+	}
+	
+	/* 附加信息 */
+	.themes{
+		padding: 0 40px;
+		margin-top: 140px;
+	}
+	.themes-cell{
+		padding: 35px 10px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.let-content{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+	
+	.label{
+		font-size: 35px;
+		color: #020202;
+		margin-left: 5px;
+	}
+	
+	.iconfont-sm{
+		font-size: 36px;
+	}
+	
+	.iconfont-arrow-right{
+		font-size: 34px;
+		color: #A7A7A7;
+	}
+</style>

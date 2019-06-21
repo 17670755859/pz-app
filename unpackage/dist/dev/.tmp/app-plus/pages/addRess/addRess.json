@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "新建收货地址",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "保存",
+        "fontSize": "17",
+        "color": "#FA9EB6"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,25 @@
+{
+  "titleNView": {
+    "searchInput": {
+      "backgroundColor": "#EEEEEE",
+      "borderRadius": "16px",
+      "placeholder": "搜索主题风格 最新主题",
+      "disabled": true,
+      "placeholderColor": "#BBB9BD",
+      "align": "left"
+    },
+    "buttons": [
+      {
+        "fontSrc": "/static/fonts/iconfont.ttf",
+        "text": "",
+        "fontSize": "26",
+        "color": "#5B5356",
+        "redDot": true,
+        "background": "rgba(0,0,0,0)"
+      }
+    ]
+  },
+  "usingComponents": {
+    "masonry": "/components/zh-masonry/masonry"
+  }
+}
